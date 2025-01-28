@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Background</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Weather Background</h1>
+      <p>
+        Digite uma cidade para ver o clima e a mudança de cor do plano de fundo:
+      </p>
+      <input type="text" id="city" placeholder="Digite o nome da cidade" />
+      <button onclick="getWeather()">Obter clima</button>
+      <p id="weather-info"></p>
+    </div>
+
+    <script>
+      async function getWeather() {
+        const city = document.getElementById("city").value;
+        const apiKey = "cc522f8802c0773cf056c064fa52165d";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+
+          if (data.cod === 200) {
+            const weather = data.weather[0].main.toLowerCase();
+            const temp = data.main.temp;
+            document.getElementById(
+              "weather-info"
+            ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C.`;
+
+            changeBackground(weather);
+          } else {
+            document.getElementById("weather-info").textContent =
+              "City not found. Please try again.";
+          }
+        } catch (error) {
+          console.error(error);
+          document.getElementById("weather-info").textContent =
+            "Error fetching weather data. Please try again later.";
+        }
+      }
+
+      function changeBackground(weather) {
+        const body = document.body;
+        switch (weather) {
+          case "clear":
+            body.style.backgroundColor = "#87CEEB"; // Sky blue
+            break;
+          case "clouds":
+            body.style.backgroundColor = "#B0C4DE"; // Light steel blue
+            break;
+          case "rain":
+          case "drizzle":
+            body.style.backgroundColor = "#708090"; // Slate gray
+            break;
+          case "thunderstorm":
+            body.style.backgroundColor = "#2F4F4F"; // Dark slate gray
+            break;
+          case "snow":
+            body.style.backgroundColor = "#FFFFFF"; // White
+            break;
+          default:
+            body.style.backgroundColor = "#2E2E2E"; // Default dark gray
+        }
+      }
+    </script>
+  </body>
+</html>
