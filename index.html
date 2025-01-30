@@ -30,9 +30,13 @@
           if (data.cod === 200) {
             const weather = data.weather[0].main.toLowerCase();
             const temp = data.main.temp;
+            const rain = data.rain ? data.rain["1h"] : 0;
+            const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
+            const humidity = data.main.humidity;
+
             document.getElementById(
               "weather-info"
-            ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C.`;
+            ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
 
             changeBackground(weather);
           } else {
