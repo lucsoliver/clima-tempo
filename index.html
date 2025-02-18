@@ -3,18 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Background</title>
+    <title>Clima Tempo</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Weather Background</h1>
-      <p>
-        Digite uma cidade para ver o clima e a mudança de cor do plano de fundo:
-      </p>
-      <input type="text" id="city" placeholder="Digite o nome da cidade" />
-      <button onclick="getWeather()">Obter clima</button>
-      <p id="weather-info"></p>
+      <div class="weather_container weather_card" id="weather_card">
+        <h1 id="ct_title">Clima Tempo</h1>
+        <p id="ct_paragraphy">
+          Digite uma cidade para ver o clima e a mudança de cor do plano de
+          fundo:
+        </p>
+        <input type="text" id="city" placeholder="Digite o nome da cidade" />
+        <button onclick="getWeather()">Obter clima</button>
+        <!-- <p id="weather-info"></p> -->
+      </div>
+
+      <div class="container wthr_container" id="wthr_container">
+        <div class="weather_results_box">
+          <small>Cidade</small>
+          <div class="weather_results_card">
+            <p id="city-info">Rio de Janeiro</p>
+          </div>
+        </div>
+
+        <div class="weather_results_box">
+          <small>Clima</small>
+          <div class="weather_results_card">
+            <p id="weather-info">33.1</p>
+          </div>
+        </div>
+
+        <div class="weather_results_box">
+          <small>Temperatura</small>
+          <div class="weather_results_card">
+            <p id="temp-info">32%</p>
+          </div>
+        </div>
+
+        <div class="weather_results_box">
+          <small>Chuva</small>
+          <div class="weather_results_card">
+            <p id="rain-info">0%</p>
+          </div>
+        </div>
+
+        <div class="weather_results_box">
+          <small>Umidade</small>
+          <div class="weather_results_card">
+            <p id="humidity-info">11%</p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
@@ -22,6 +62,8 @@
         const city = document.getElementById("city").value;
         const apiKey = "cc522f8802c0773cf056c064fa52165d";
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+        // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
         try {
           const response = await fetch(url);
@@ -34,19 +76,31 @@
             const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
             const humidity = data.main.humidity;
 
+            document.getElementById("wthr_container").style = "display:flex";
+            document.getElementById("ct_title").style = "display:none";
+            document.getElementById("ct_paragraphy").style = "display:none";
+
+            // document.getElementById(
+            //   "weather-info"
+            // ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
+
+            document.getElementById("city-info").textContent = `${city}`;
+            document.getElementById("weather-info").textContent = `${weather}`;
+            document.getElementById("temp-info").textContent = `${temp}`;
+            document.getElementById("rain-info").textContent = `${rain}`;
             document.getElementById(
-              "weather-info"
-            ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
+              "humidity-info"
+            ).textContent = `${humidity}`;
 
             changeBackground(weather);
           } else {
             document.getElementById("weather-info").textContent =
-              "City not found. Please try again.";
+              "Cidade não encontrada. Tente novamente.";
           }
         } catch (error) {
           console.error(error);
           document.getElementById("weather-info").textContent =
-            "Error fetching weather data. Please try again later.";
+            "Erro ao buscar dados meteorológicos. Tente novamente mais tarde";
         }
       }
 
