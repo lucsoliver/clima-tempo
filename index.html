@@ -23,37 +23,51 @@
         <div class="weather_results_box">
           <small>Cidade</small>
           <div class="weather_results_card">
-            <p id="city-info">Rio de Janeiro</p>
+            <p id="city-info"></p>
           </div>
         </div>
 
         <div class="weather_results_box">
           <small>Clima</small>
           <div class="weather_results_card">
-            <p id="weather-info">33.1</p>
+            <p id="weather-info"></p>
           </div>
         </div>
 
         <div class="weather_results_box">
           <small>Temperatura</small>
           <div class="weather_results_card">
-            <p id="temp-info">32%</p>
+            <p id="temp-info"></p>
           </div>
         </div>
 
         <div class="weather_results_box">
           <small>Chuva</small>
           <div class="weather_results_card">
-            <p id="rain-info">0%</p>
+            <p id="rain-info"></p>
           </div>
         </div>
 
         <div class="weather_results_box">
           <small>Umidade</small>
           <div class="weather_results_card">
-            <p id="humidity-info">11%</p>
+            <p id="humidity-info"></p>
           </div>
         </div>
+
+        <div class="weather_results_box">
+          <small>Descrição</small>
+          <div class="weather_results_card">
+            <p id="description-info"></p>
+          </div>
+        </div>
+
+           <!-- <div class="weather_results_box">
+          <small></small>
+          <div class="weather_results_card">
+            <p id="icon-info"></p>
+          </div>
+        </div> -->
       </div>
     </div>
 
@@ -61,7 +75,8 @@
       async function getWeather() {
         const city = document.getElementById("city").value;
         const apiKey = "cc522f8802c0773cf056c064fa52165d";
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        const lang = "pt_br";
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
 
         // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
@@ -75,6 +90,8 @@
             const rain = data.rain ? data.rain["1h"] : 0;
             const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
             const humidity = data.main.humidity;
+            const description = data.weather[0].description;
+            // const icon = data.weather.icon;
 
             document.getElementById("wthr_container").style = "display:flex";
             document.getElementById("ct_title").style = "display:none";
@@ -88,9 +105,10 @@
             document.getElementById("weather-info").textContent = `${weather}`;
             document.getElementById("temp-info").textContent = `${temp}`;
             document.getElementById("rain-info").textContent = `${rain}`;
-            document.getElementById(
-              "humidity-info"
-            ).textContent = `${humidity}`;
+            document.getElementById("humidity-info").textContent = `${humidity}`;
+            document.getElementById("description-info").textContent = `${description}`;
+            // document.getElementById("icon-info").textContent = `${icon}`;
+
 
             changeBackground(weather);
           } else {

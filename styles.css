@@ -70,4 +70,5 @@ button:hover {
   text-align: center;
   margin: 0;
   max-width: max-content;
+  text-transform: capitalize;
 }
