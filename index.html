@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clima Tempo</title>
     <link rel="stylesheet" href="styles.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
+      <span id="new_search">Fazer nova pesquisa.</span>
+
       <div class="weather_container weather_card" id="weather_card">
         <h1 id="ct_title">Clima Tempo</h1>
         <p id="ct_paragraphy">
@@ -15,136 +24,139 @@
           fundo:
         </p>
         <input type="text" id="city" placeholder="Digite o nome da cidade" />
-        <button onclick="getWeather()">Obter clima</button>
+        <button onclick="getWeather()">Obter Clima</button>
         <!-- <p id="weather-info"></p> -->
       </div>
 
       <div class="container wthr_container" id="wthr_container">
-        <div class="weather_results_box">
-          <small>Cidade</small>
-          <div class="weather_results_card">
-            <p id="city-info"></p>
+        <div class="wthr_box">
+          <div class="weather_results_box">
+            <small>Cidade</small>
+            <div class="weather_results_card">
+              <p id="city-info"></p>
+            </div>
           </div>
-        </div>
 
-        <div class="weather_results_box">
-          <small>Clima</small>
-          <div class="weather_results_card">
-            <p id="weather-info"></p>
-          </div>
-        </div>
+          <div class="tcuv_container">
+            <div class="temp_box">
+              <div class="">
+                <p id="temp-info">25</p>
+                <img id="icon-info" />
+                <p id="temp-info"></p>
+              </div>
+              <div class="cuv_results_box">
+                <div class="cuv_results_card">
+                  <p>Chuva:</p>
+                  <p id="rain-info"></p>
+                </div>
+                <div class="cuv_results_card">
+                  <p>Umidade:</p>
+                  <p id="humidity-info"></p>
+                </div>
 
-        <div class="weather_results_box">
-          <small>Temperatura</small>
-          <div class="weather_results_card">
-            <p id="temp-info"></p>
-          </div>
-        </div>
+                <div class="cuv_results_card">
+                  <p>Vento:</p>
+                  <p id="wind-info"></p>
+                </div>
+              </div>
+            </div>
 
-        <div class="weather_results_box">
-          <small>Chuva</small>
-          <div class="weather_results_card">
-            <p id="rain-info"></p>
+            <div class="clima_results_box">
+              <p>Clima</p>
+              <p id="weather-info"></p>
+              <p>Descrição</p>
+              <p id="description-info"></p>
+            </div>
           </div>
-        </div>
 
-        <div class="weather_results_box">
-          <small>Umidade</small>
-          <div class="weather_results_card">
-            <p id="humidity-info"></p>
-          </div>
+          <div class="weather_results_box"></div>
         </div>
-
-        <div class="weather_results_box">
-          <small>Descrição</small>
-          <div class="weather_results_card">
-            <p id="description-info"></p>
-          </div>
-        </div>
-
-           <!-- <div class="weather_results_box">
-          <small></small>
-          <div class="weather_results_card">
-            <p id="icon-info"></p>
-          </div>
-        </div> -->
       </div>
-    </div>
 
-    <script>
-      async function getWeather() {
-        const city = document.getElementById("city").value;
-        const apiKey = "cc522f8802c0773cf056c064fa52165d";
-        const lang = "pt_br";
-        const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
+      <script>
+        async function getWeather() {
+          const city = document.getElementById("city").value;
+          const apiKey = "cc522f8802c0773cf056c064fa52165d";
+          const lang = "pt_br";
+          const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
 
-        // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
+          // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
 
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
+          try {
+            const response = await fetch(url);
+            const data = await response.json();
 
-          if (data.cod === 200) {
-            const weather = data.weather[0].main.toLowerCase();
-            const temp = data.main.temp;
-            const rain = data.rain ? data.rain["1h"] : 0;
-            const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
-            const humidity = data.main.humidity;
-            const description = data.weather[0].description;
-            // const icon = data.weather.icon;
+            if (data.cod === 200) {
+              const weather = data.weather[0].main.toLowerCase();
+              const temp = data.main.temp;
+              const rain = data.rain ? data.rain["1h"] : 0;
+              const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
+              const humidity = data.main.humidity;
+              const wind = data.wind.speed;
+              const description = data.weather[0].description;
+              const icon = data.weather[0].icon;
+              const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-            document.getElementById("wthr_container").style = "display:flex";
-            document.getElementById("ct_title").style = "display:none";
-            document.getElementById("ct_paragraphy").style = "display:none";
+              document.getElementById("wthr_container").style = "display:block";
+              document.getElementById("new_search").style = "display:block";
+              document.getElementById("ct_title").style = "display:none";
+              document.getElementById("ct_paragraphy").style = "display:none";
 
-            // document.getElementById(
-            //   "weather-info"
-            // ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
+              // document.getElementById(
+              //   "weather-info"
+              // ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
 
-            document.getElementById("city-info").textContent = `${city}`;
-            document.getElementById("weather-info").textContent = `${weather}`;
-            document.getElementById("temp-info").textContent = `${temp}`;
-            document.getElementById("rain-info").textContent = `${rain}`;
-            document.getElementById("humidity-info").textContent = `${humidity}`;
-            document.getElementById("description-info").textContent = `${description}`;
-            // document.getElementById("icon-info").textContent = `${icon}`;
+              document.getElementById("city-info").textContent = `${city}`;
+              document.getElementById(
+                "weather-info"
+              ).textContent = `${weather}`;
+              document.getElementById("temp-info").textContent = `${temp}`;
+              document.getElementById("rain-info").textContent = `${rain}`;
+              document.getElementById(
+                "humidity-info"
+              ).textContent = `${humidity}`;
+              document.getElementById("wind-info").textContent = `${wind}`;
+              document.getElementById(
+                "description-info"
+              ).textContent = `${description}`;
+              document.getElementById("icon-info").src = iconUrl;
 
-
-            changeBackground(weather);
-          } else {
+              changeBackground(weather);
+            } else {
+              document.getElementById("weather-info").textContent =
+                "Cidade não encontrada. Tente novamente.";
+            }
+          } catch (error) {
+            console.error(error);
             document.getElementById("weather-info").textContent =
-              "Cidade não encontrada. Tente novamente.";
+              "Erro ao buscar dados meteorológicos. Tente novamente mais tarde";
           }
-        } catch (error) {
-          console.error(error);
-          document.getElementById("weather-info").textContent =
-            "Erro ao buscar dados meteorológicos. Tente novamente mais tarde";
         }
-      }
 
-      function changeBackground(weather) {
-        const body = document.body;
-        switch (weather) {
-          case "clear":
-            body.style.backgroundColor = "#87CEEB"; // Sky blue
-            break;
-          case "clouds":
-            body.style.backgroundColor = "#B0C4DE"; // Light steel blue
-            break;
-          case "rain":
-          case "drizzle":
-            body.style.backgroundColor = "#708090"; // Slate gray
-            break;
-          case "thunderstorm":
-            body.style.backgroundColor = "#2F4F4F"; // Dark slate gray
-            break;
-          case "snow":
-            body.style.backgroundColor = "#FFFFFF"; // White
-            break;
-          default:
-            body.style.backgroundColor = "#2E2E2E"; // Default dark gray
+        function changeBackground(weather) {
+          const body = document.body;
+          switch (weather) {
+            case "clear":
+              body.style.backgroundColor = "#87CEEB"; // Sky blue
+              break;
+            case "clouds":
+              body.style.backgroundColor = "#B0C4DE"; // Light steel blue
+              break;
+            case "rain":
+            case "drizzle":
+              body.style.backgroundColor = "#708090"; // Slate gray
+              break;
+            case "thunderstorm":
+              body.style.backgroundColor = "#2F4F4F"; // Dark slate gray
+              break;
+            case "snow":
+              body.style.backgroundColor = "#FFFFFF"; // White
+              break;
+            default:
+              body.style.backgroundColor = "#2E2E2E"; // Default dark gray
+          }
         }
-      }
-    </script>
+      </script>
+    </div>
   </body>
 </html>
