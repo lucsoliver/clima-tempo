@@ -18,8 +18,8 @@
       <span id="new-search">Fazer nova pesquisa.</span>
 
       <div class="search-container weather-card" id="weather-card">
-        <h1 id="ct-title">Clima Tempo</h1>
-        <p id="ct-paragraphy">
+        <h1 id="search-title">Clima Tempo</h1>
+        <p id="search-paragraphy">
           Digite uma cidade para ver o clima e a mudança de cor do plano de
           fundo:
         </p>
@@ -29,41 +29,31 @@
       </div>
 
       <div class="container weather-container" id="weather-container">
-        <div class="wthr-box">
-          <p id="city-info"></p>
-
-          <div class="tcuv-container">
-            <div class="temp-box">
-              <div class="box-results-temp">
-                <img id="icon-info" />
-                <p id="temp-info"></p>
-              </div>
-              <div class="cuv-results-box">
-                <div class="cuv-results-card">
-                  <p>Chuva:</p>
-                  <p id="rain-info"></p>
-                </div>
-                <div class="cuv-results-card">
-                  <p>Umidade:</p>
-                  <p id="humidity-info"></p>
-                </div>
-
-                <div class="cuv-results-card">
-                  <p>Vento:</p>
-                  <p id="wind-info"></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="clima-results-box">
-              <p>Clima</p>
-              <p id="weather-info"></p>
-              <p>Descrição</p>
-              <p id="description-info"></p>
-            </div>
+        <div class="box-results-temp">
+          <div class="clima-results-head">
+            <img id="icon-info" />
+            <p id="temp-info"></p>
+            <p id="description-info"></p>
           </div>
-
-          <div class="weather-results-box"></div>
+          <div class="clima-results-box">
+            <p>Clima</p>
+            <p id="city-info"></p>
+            <p id="weather-info"></p>
+          </div>
+        </div>
+        <div class="results-bottom">
+          <div class="results-text-bottom r-border-text">
+            <p>Chuva</p>
+            <p id="rain-info"></p>
+          </div>
+          <div class="results-text-bottom r-border-text">
+            <p>Umidade</p>
+            <p id="humidity-info"></p>
+          </div>
+          <div class="results-text-bottom ml-1">
+            <p>Vento</p>
+            <p id="wind-info"></p>
+          </div>
         </div>
       </div>
 
@@ -94,8 +84,9 @@
               document.getElementById("weather-container").style =
                 "display:block";
               document.getElementById("new-search").style = "display:block";
-              document.getElementById("ct-title").style = "display:none";
-              document.getElementById("ct-paragraphy").style = "display:none";
+              document.getElementById("search-title").style = "display:none";
+              document.getElementById("search-paragraphy").style =
+                "display:none";
 
               // document.getElementById(
               //   "weather-info"

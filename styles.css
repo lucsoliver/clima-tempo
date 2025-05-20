@@ -102,20 +102,17 @@ button:hover {
 .weather-container {
   /* display: flex; */
   flex-direction: row;
+  width: auto;
+  height: auto;
+  background-color: #37474f83;
+  border-radius: 0.7rem;
+  padding: 1rem 0 0.5rem 0;
+  margin: 2rem 0;
+  text-transform: capitalize;
 }
 
 #new-search {
   display: none;
-}
-
-.wthr-box {
-  width: auto;
-  height: auto;
-  background-color: #37474f;
-  border-radius: 2rem;
-  padding: 0.5rem 1rem;
-  margin: 2rem 0;
-  text-transform: capitalize;
 }
 
 .weather-results-box {
@@ -125,42 +122,39 @@ button:hover {
   margin: 1rem;
 }
 
-.tcuv-container {
+.results-bottom {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.temp-box {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: auto;
-}
-
-.temp-box p#temp-info {
-  font-size: 2rem;
-}
-
-.cuv-results-box {
-  display: flex;
-  flex-direction: column;
   align-items: baseline;
   margin: 0 1rem;
   text-align: start;
+  border-top: 1px solid #37474f;
 }
 
-.cuv-results-card {
+.results-text-bottom {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0 0 0;
 }
 
-.cuv-results-card p {
-  margin: 0.2rem 0;
+.r-border-text {
+  border-right: 1px solid #37474f;
+  height: 3rem;
+  padding: 0 1rem;
 }
 
-.cuv-results-card p#rain-info,
+.ml-1 {
+  margin-left: 1rem;
+  padding: 0 1rem 0 0;
+}
+
+.results-text-bottom p {
+  margin: 0 0 0.2rem 0;
+}
+
+.results-text-bottom p#rain-info,
 #humidity-info,
 #wind-info,
 #city-info {
@@ -170,6 +164,16 @@ button:hover {
 #icon-info {
   width: 40px;
   height: 40px;
+}
+
+.clima-results-head {
+  /* display: grid; */
+  grid-column: 1 / 3;
+  grid-row: 1;
+  /* grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: center; */
 }
 
 .clima-results-box {
