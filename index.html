@@ -15,53 +15,47 @@
   </head>
   <body>
     <div class="container">
-      <span id="new_search">Fazer nova pesquisa.</span>
+      <span id="new-search">Fazer nova pesquisa.</span>
 
-      <div class="weather_container weather_card" id="weather_card">
-        <h1 id="ct_title">Clima Tempo</h1>
-        <p id="ct_paragraphy">
+      <div class="search-container weather-card" id="weather-card">
+        <h1 id="ct-title">Clima Tempo</h1>
+        <p id="ct-paragraphy">
           Digite uma cidade para ver o clima e a mudança de cor do plano de
           fundo:
         </p>
         <input type="text" id="city" placeholder="Digite o nome da cidade" />
-        <button onclick="getWeather()">Obter Clima</button>
+        <button onclick="getWeather()">Pesquisar</button>
         <!-- <p id="weather-info"></p> -->
       </div>
 
-      <div class="container wthr_container" id="wthr_container">
-        <div class="wthr_box">
-          <div class="weather_results_box">
-            <small>Cidade</small>
-            <div class="weather_results_card">
-              <p id="city-info"></p>
-            </div>
-          </div>
+      <div class="container weather-container" id="weather-container">
+        <div class="wthr-box">
+          <p id="city-info"></p>
 
-          <div class="tcuv_container">
-            <div class="temp_box">
-              <div class="">
-                <p id="temp-info">25</p>
+          <div class="tcuv-container">
+            <div class="temp-box">
+              <div class="box-results-temp">
                 <img id="icon-info" />
                 <p id="temp-info"></p>
               </div>
-              <div class="cuv_results_box">
-                <div class="cuv_results_card">
+              <div class="cuv-results-box">
+                <div class="cuv-results-card">
                   <p>Chuva:</p>
                   <p id="rain-info"></p>
                 </div>
-                <div class="cuv_results_card">
+                <div class="cuv-results-card">
                   <p>Umidade:</p>
                   <p id="humidity-info"></p>
                 </div>
 
-                <div class="cuv_results_card">
+                <div class="cuv-results-card">
                   <p>Vento:</p>
                   <p id="wind-info"></p>
                 </div>
               </div>
             </div>
 
-            <div class="clima_results_box">
+            <div class="clima-results-box">
               <p>Clima</p>
               <p id="weather-info"></p>
               <p>Descrição</p>
@@ -69,7 +63,7 @@
             </div>
           </div>
 
-          <div class="weather_results_box"></div>
+          <div class="weather-results-box"></div>
         </div>
       </div>
 
@@ -80,7 +74,7 @@
           const lang = "pt_br";
           const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
 
-          // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt_br&units=metric`;
+          // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt-br&units=metric`;
 
           try {
             const response = await fetch(url);
@@ -97,10 +91,11 @@
               const icon = data.weather[0].icon;
               const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
-              document.getElementById("wthr_container").style = "display:block";
-              document.getElementById("new_search").style = "display:block";
-              document.getElementById("ct_title").style = "display:none";
-              document.getElementById("ct_paragraphy").style = "display:none";
+              document.getElementById("weather-container").style =
+                "display:block";
+              document.getElementById("new-search").style = "display:block";
+              document.getElementById("ct-title").style = "display:none";
+              document.getElementById("ct-paragraphy").style = "display:none";
 
               // document.getElementById(
               //   "weather-info"

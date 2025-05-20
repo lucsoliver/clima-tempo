@@ -69,7 +69,7 @@ body {
   align-items: center;
   gap: 1rem 0;
 }
-.weather_container {
+.search-container {
   width: auto;
   padding: 20px;
   background: rgba(0, 0, 0, 0.5);
@@ -95,20 +95,20 @@ button:hover {
   background-color: #0056b3;
 }
 
-#wthr_container {
+#weather-container {
   display: none;
 }
 
-.wthr_container {
+.weather-container {
   /* display: flex; */
   flex-direction: row;
 }
 
-#new_search {
+#new-search {
   display: none;
 }
 
-.wthr_box {
+.wthr-box {
   width: auto;
   height: auto;
   background-color: #37474f;
@@ -118,50 +118,52 @@ button:hover {
   text-transform: capitalize;
 }
 
-.weather_results_box {
+.weather-results-box {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   margin: 1rem;
 }
 
-.tcuv_container {
+.tcuv-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
-.temp_box {
+.temp-box {
   display: flex;
   flex-direction: row;
   width: auto;
   height: auto;
 }
 
-.temp_box p#temp-info {
+.temp-box p#temp-info {
   font-size: 2rem;
 }
 
-.cuv_results_box {
+.cuv-results-box {
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  margin: 1rem;
+  margin: 0 1rem;
+  text-align: start;
 }
 
-.cuv_results_card {
+.cuv-results-card {
   display: flex;
   flex-direction: row;
 }
 
-.cuv_results_card p {
+.cuv-results-card p {
   margin: 0.2rem 0;
 }
 
-.cuv_results_card p#rain-info,
+.cuv-results-card p#rain-info,
 #humidity-info,
-#wind-info {
+#wind-info,
+#city-info {
   margin-left: 0.2rem;
 }
 
@@ -170,21 +172,22 @@ button:hover {
   height: 40px;
 }
 
-.clima_results_box {
+.clima-results-box {
   display: flex;
   flex-direction: column;
   gap: 0;
+  text-align: end;
 }
 
-.clima_results_box p {
+.clima-results-box p {
   margin: 0;
 }
 
-.wthr_container small {
+.weather-container small {
   display: contents;
 }
 
-.weather_results_card {
+.weather-results-card {
   display: flex;
   background-color: #fff;
   color: #1a1a1a;
@@ -194,9 +197,17 @@ button:hover {
   border-radius: 0.4rem;
 }
 
-.weather_results_card p {
+.weather-results-card p {
   text-align: center;
   margin: 0;
   max-width: max-content;
   text-transform: capitalize;
+}
+
+.box-results-temp {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
 }
