@@ -16,6 +16,11 @@
   <body>
     <div class="container">
       <span id="new-search">Fazer nova pesquisa.</span>
+      <div class="clima-results-box">
+        <p>Clima</p>
+        <p id="city-info"></p>
+        <p id="weather-info"></p>
+      </div>
 
       <div class="search-container weather-card" id="weather-card">
         <h1 id="search-title">Clima Tempo</h1>
@@ -31,14 +36,11 @@
       <div class="container weather-container" id="weather-container">
         <div class="box-results-temp">
           <div class="clima-results-head">
-            <img id="icon-info" />
-            <p id="temp-info"></p>
+            <div class="temp-result-box">
+              <img id="icon-info" />
+              <p id="temp-info"></p>
+            </div>
             <p id="description-info"></p>
-          </div>
-          <div class="clima-results-box">
-            <p>Clima</p>
-            <p id="city-info"></p>
-            <p id="weather-info"></p>
           </div>
         </div>
         <div class="results-bottom">
@@ -96,12 +98,16 @@
               document.getElementById(
                 "weather-info"
               ).textContent = `${weather}`;
-              document.getElementById("temp-info").textContent = `${temp}`;
-              document.getElementById("rain-info").textContent = `${rain}`;
+              document.getElementById("temp-info").textContent = `${Math.round(
+                temp
+              )} °C`;
+              document.getElementById("rain-info").textContent = `${rain}%`;
               document.getElementById(
                 "humidity-info"
-              ).textContent = `${humidity}`;
-              document.getElementById("wind-info").textContent = `${wind}`;
+              ).textContent = `${humidity}%`;
+              document.getElementById("wind-info").textContent = `${Math.round(
+                wind
+              )} km/h`;
               document.getElementById(
                 "description-info"
               ).textContent = `${description}`;
