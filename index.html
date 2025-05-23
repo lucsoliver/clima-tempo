@@ -15,49 +15,53 @@
   </head>
   <body>
     <div class="container">
-      <span id="new-search">Fazer nova pesquisa.</span>
-      <div class="clima-results-box">
-        <p>Clima</p>
+      <!-- <div class="clima-results-box">
         <p id="city-info"></p>
         <p id="weather-info"></p>
-      </div>
+      </div> -->
 
       <div class="search-container weather-card" id="weather-card">
         <h1 id="search-title">Clima Tempo</h1>
-        <p id="search-paragraphy">
-          Digite uma cidade para ver o clima e a mudança de cor do plano de
-          fundo:
+        <h1 id="search-title-second">Digite o nome da cidade</h1>
+        <p class="search-paragraphy sp-top">
+          Veja as condições atuais do tempo na <br />cidade.
         </p>
-        <input type="text" id="city" placeholder="Digite o nome da cidade" />
-        <button onclick="getWeather()">Pesquisar</button>
-        <!-- <p id="weather-info"></p> -->
-      </div>
+        <div class="search-box">
+          <input type="text" id="city" placeholder="Digite o nome da cidade" />
+          <button onclick="getWeather()">Pesquisar</button>
+        </div>
+        <p class="search-paragraphy sp-bottom">
+          Dados meteorológicos atualizados para <br />
+          se manter informado sobre o clima.
+        </p>
 
-      <div class="container weather-container" id="weather-container">
-        <div class="box-results-temp">
-          <div class="clima-results-head">
-            <div class="temp-result-box">
-              <img id="icon-info" />
-              <p id="temp-info"></p>
+        <div class="container weather-container" id="weather-container">
+          <div class="box-results-temp">
+            <div class="clima-results-head">
+              <div class="temp-result-box">
+                <img id="icon-info" />
+                <p id="temp-info"></p>
+              </div>
+              <p id="description-info"></p>
             </div>
-            <p id="description-info"></p>
           </div>
-        </div>
-        <div class="results-bottom">
-          <div class="results-text-bottom r-border-text">
-            <p>Chuva</p>
-            <p id="rain-info"></p>
-          </div>
-          <div class="results-text-bottom r-border-text">
-            <p>Umidade</p>
-            <p id="humidity-info"></p>
-          </div>
-          <div class="results-text-bottom ml-1">
-            <p>Vento</p>
-            <p id="wind-info"></p>
+          <div class="results-bottom">
+            <div class="results-text-bottom r-border-text">
+              <p>Chuva</p>
+              <p id="rain-info"></p>
+            </div>
+            <div class="results-text-bottom r-border-text">
+              <p>Umidade</p>
+              <p id="humidity-info"></p>
+            </div>
+            <div class="results-text-bottom ml-1">
+              <p>Vento</p>
+              <p id="wind-info"></p>
+            </div>
           </div>
         </div>
       </div>
+      <p id="erro-info"></p>
 
       <script>
         async function getWeather() {
@@ -65,8 +69,6 @@
           const apiKey = "cc522f8802c0773cf056c064fa52165d";
           const lang = "pt_br";
           const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
-
-          // const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=pt-br&units=metric`;
 
           try {
             const response = await fetch(url);
@@ -85,19 +87,18 @@
 
               document.getElementById("weather-container").style =
                 "display:block";
-              document.getElementById("new-search").style = "display:block";
               document.getElementById("search-title").style = "display:none";
-              document.getElementById("search-paragraphy").style =
-                "display:none";
+              document.getElementById("search-title-second").style =
+                "display:block";
+              document.getElementById("erro-info").style = "display:none";
+              document
+                .querySelectorAll(".search-paragraphy")
+                .forEach((item) => (item.style.display = "none"));
 
+              // document.getElementById("city-info").textContent = `${city}`;
               // document.getElementById(
               //   "weather-info"
-              // ).textContent = `O Clima em ${city} é ${weather} com uma temperatura de ${temp}°C. Chuva: ${rain}%. Umidade: ${humidity}%.`;
-
-              document.getElementById("city-info").textContent = `${city}`;
-              document.getElementById(
-                "weather-info"
-              ).textContent = `${weather}`;
+              // ).textContent = `${weather}`;
               document.getElementById("temp-info").textContent = `${Math.round(
                 temp
               )} °C`;
@@ -115,12 +116,14 @@
 
               changeBackground(weather);
             } else {
-              document.getElementById("weather-info").textContent =
+              document.getElementById("erro-info").style = "display:block";
+              document.getElementById("erro-info").textContent =
                 "Cidade não encontrada. Tente novamente.";
             }
           } catch (error) {
+            document.getElementById("erro-info").style = "display:block";
             console.error(error);
-            document.getElementById("weather-info").textContent =
+            document.getElementById("erro-info").textContent =
               "Erro ao buscar dados meteorológicos. Tente novamente mais tarde";
           }
         }
@@ -129,23 +132,23 @@
           const body = document.body;
           switch (weather) {
             case "clear":
-              body.style.backgroundColor = "#87CEEB"; // Sky blue
+              body.style.backgroundColor = "#87CEEB";
               break;
             case "clouds":
-              body.style.backgroundColor = "#B0C4DE"; // Light steel blue
+              body.style.backgroundColor = "#B0C4DE";
               break;
             case "rain":
             case "drizzle":
-              body.style.backgroundColor = "#708090"; // Slate gray
+              body.style.backgroundColor = "#708090";
               break;
             case "thunderstorm":
-              body.style.backgroundColor = "#2F4F4F"; // Dark slate gray
+              body.style.backgroundColor = "#2F4F4F";
               break;
             case "snow":
-              body.style.backgroundColor = "#FFFFFF"; // White
+              body.style.backgroundColor = "#FFFFFF";
               break;
             default:
-              body.style.backgroundColor = "#2E2E2E"; // Default dark gray
+              body.style.backgroundColor = "#2E2E2E";
           }
         }
       </script>
