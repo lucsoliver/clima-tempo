@@ -263,6 +263,17 @@ button:hover {
 #temp-info {
   font-size: 2rem;
 }
+
+.weather-bg-img {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  z-index: 10;
+}
+
 @media only screen and (max-width: 375px) {
   .search-container {
     padding: 1.25rem 1rem;

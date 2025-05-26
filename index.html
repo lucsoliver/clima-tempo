@@ -15,6 +15,8 @@
   </head>
   <body>
     <div class="container">
+      <img id="weather-bg-img" class="weather-bg-img" />
+
       <!-- <div class="clima-results-box">
         <p id="city-info"></p>
         <p id="weather-info"></p>
@@ -87,34 +89,39 @@
 
               document.getElementById("weather-container").style =
                 "display:block";
+
               document.getElementById("search-title").style = "display:none";
+
               document.getElementById("search-title-second").style =
                 "display:block";
+
               document.getElementById("erro-info").style = "display:none";
+
               document
                 .querySelectorAll(".search-paragraphy")
                 .forEach((item) => (item.style.display = "none"));
-
-              // document.getElementById("city-info").textContent = `${city}`;
-              // document.getElementById(
-              //   "weather-info"
-              // ).textContent = `${weather}`;
               document.getElementById("temp-info").textContent = `${Math.round(
                 temp
               )} °C`;
+
               document.getElementById("rain-info").textContent = `${rain}%`;
+
               document.getElementById(
                 "humidity-info"
               ).textContent = `${humidity}%`;
+
               document.getElementById("wind-info").textContent = `${Math.round(
                 wind
               )} km/h`;
+
               document.getElementById(
                 "description-info"
               ).textContent = `${description}`;
+
               document.getElementById("icon-info").src = iconUrl;
 
               changeBackground(weather);
+              updateWeatherImage(weather);
             } else {
               document.getElementById("erro-info").style = "display:block";
               document.getElementById("erro-info").textContent =
@@ -126,6 +133,33 @@
             document.getElementById("erro-info").textContent =
               "Erro ao buscar dados meteorológicos. Tente novamente mais tarde";
           }
+        }
+
+        function updateWeatherImage(weather) {
+          const img = document.getElementById("weather-bg-img");
+
+          switch (weather) {
+            case "clear":
+              img.src = "imgs/sun.png";
+              break;
+            case "clouds":
+              img.src = "imgs/cloud.png";
+              break;
+            case "rain":
+            case "drizzle":
+              img.src = "imgs/rain.png";
+              break;
+            case "thunderstorm":
+              img.src = "imgs/thunder.png";
+              break;
+            case "snow":
+              img.src = "imgs/snow.png";
+              break;
+            default:
+              img.src = "imgs/default.png";
+          }
+
+          img.alt = weather;
         }
 
         function changeBackground(weather) {
