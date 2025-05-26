@@ -16,12 +16,6 @@
   <body>
     <div class="container">
       <img id="weather-bg-img" class="weather-bg-img" />
-
-      <!-- <div class="clima-results-box">
-        <p id="city-info"></p>
-        <p id="weather-info"></p>
-      </div> -->
-
       <div class="search-container weather-card" id="weather-card">
         <h1 id="search-title">Clima Tempo</h1>
         <h1 id="search-title-second">Digite o nome da cidade</h1>
@@ -30,7 +24,7 @@
         </p>
         <div class="search-box">
           <input type="text" id="city" placeholder="Digite o nome da cidade" />
-          <button onclick="getWeather()">Pesquisar</button>
+          <button onclick="getWeather()" id="btn-pesquisar">Pesquisar</button>
         </div>
         <p class="search-paragraphy sp-bottom">
           Dados meteorológicos atualizados para <br />
@@ -42,23 +36,23 @@
             <div class="clima-results-head">
               <div class="temp-result-box">
                 <img id="icon-info" />
-                <p id="temp-info"></p>
+                <p id="temp-info" class="status-info"></p>
               </div>
-              <p id="description-info"></p>
+              <p id="description-info" class="status-info"></p>
             </div>
           </div>
           <div class="results-bottom">
             <div class="results-text-bottom r-border-text">
               <p>Chuva</p>
-              <p id="rain-info"></p>
+              <p id="rain-info" class="status-info"></p>
             </div>
             <div class="results-text-bottom r-border-text">
               <p>Umidade</p>
-              <p id="humidity-info"></p>
+              <p id="humidity-info" class="status-info"></p>
             </div>
             <div class="results-text-bottom ml-1">
               <p>Vento</p>
-              <p id="wind-info"></p>
+              <p id="wind-info" class="status-info"></p>
             </div>
           </div>
         </div>
@@ -90,6 +84,9 @@
               document.getElementById("weather-container").style =
                 "display:block";
 
+              document.getElementById("weather-bg-img").style =
+                "display: block";
+
               document.getElementById("search-title").style = "display:none";
 
               document.getElementById("search-title-second").style =
@@ -120,12 +117,30 @@
 
               document.getElementById("icon-info").src = iconUrl;
 
-              changeBackground(weather);
+              document
+                .querySelectorAll(".status-info")
+                .forEach((item) => (item.style.display = "block"));
+
               updateWeatherImage(weather);
             } else {
-              document.getElementById("erro-info").style = "display:block";
               document.getElementById("erro-info").textContent =
                 "Cidade não encontrada. Tente novamente.";
+
+              document.getElementById("erro-info").style = "display:block";
+
+              document.body.style.background = "#ebab87";
+
+              document.getElementById("weather-bg-img").style = "display: none";
+
+              document.getElementById("icon-info").src =
+                "images/error-icon.png";
+
+              document
+                .querySelectorAll(".status-info")
+                .forEach((item) => (item.style.display = "none"));
+
+              document.querySelector(".search-container").style =
+                "background:#37474fcc;";
             }
           } catch (error) {
             document.getElementById("erro-info").style = "display:block";
@@ -140,51 +155,35 @@
 
           switch (weather) {
             case "clear":
-              img.src = "imgs/sun.png";
+              img.src = "images/clear.jpg";
               break;
             case "clouds":
-              img.src = "imgs/cloud.png";
+              img.src = "images/clouds.jpg";
               break;
             case "rain":
             case "drizzle":
-              img.src = "imgs/rain.png";
+              img.src = "images/rain.jpg";
               break;
             case "thunderstorm":
-              img.src = "imgs/thunder.png";
+              img.src = "images/thunder.jpg";
               break;
             case "snow":
-              img.src = "imgs/snow.png";
+              img.src = "images/snow.jpg";
               break;
             default:
-              img.src = "imgs/default.png";
+              img.src = "images/clear.jpg";
           }
 
           img.alt = weather;
         }
 
-        function changeBackground(weather) {
-          const body = document.body;
-          switch (weather) {
-            case "clear":
-              body.style.backgroundColor = "#87CEEB";
-              break;
-            case "clouds":
-              body.style.backgroundColor = "#B0C4DE";
-              break;
-            case "rain":
-            case "drizzle":
-              body.style.backgroundColor = "#708090";
-              break;
-            case "thunderstorm":
-              body.style.backgroundColor = "#2F4F4F";
-              break;
-            case "snow":
-              body.style.backgroundColor = "#FFFFFF";
-              break;
-            default:
-              body.style.backgroundColor = "#2E2E2E";
-          }
-        }
+        document
+          .getElementById("city")
+          .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+              document.getElementById("btn-pesquisar").click();
+            }
+          });
       </script>
     </div>
   </body>
