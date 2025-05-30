@@ -23,6 +23,7 @@ Busca por qualquer cidade do mundo; <br>
 Exibição de dados climáticos em tempo real;<br>
 Alteração dinâmica do fundo do site com base na temperatura
 <br>
+<br>
 
 # Pré-requisitos
 
@@ -49,6 +50,7 @@ Fetch API
 Manipulação do DOM
 
 Uso de API externa (OpenWeatherMap)
+<br>
 <br>
 
 # Instalação
