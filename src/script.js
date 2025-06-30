@@ -1,9 +1,6 @@
 async function getWeather() {
           const city = document.getElementById("city").value;
-          // Esta API key está pública por ser um projeto para meu portfólio.
-          // Evite usar em produção. Crie sua própria key em openweathermap.org.
-          const apiKey = "cc522f8802c0773cf056c064fa52165d";
-          // const apiKey = "SUA_API_KEY_AQUI";
+          const apiKey = "SUA_API_KEY_AQUI";
           const lang = "pt_br";
           const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&lang=${lang}&units=metric`;
 
