@@ -34,12 +34,14 @@ Para executar o projeto localmente, você precisa de:
 - Uma chave gratuita da API do [OpenWeatherMap](https://openweathermap.org/api)
 <br>
 
+<!---
 > **Sobre a API** 
 > 
 > Este projeto usa a OpenWeather API com uma chave pública apenas para demonstração.
 > Os dados meteorológicos são fornecidos por [OpenWeather](https://openweathermap.org/), conforme os termos de uso disponíveis em https://openweather.co.uk/privacy-policy.  
 > Recomenda-se não reutilizar a mesma chave em ambientes de produção.
 <br>
+--->
 
  # Tecnologias e conceitos
 
