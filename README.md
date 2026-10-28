@@ -18,8 +18,8 @@ Ele mostra:
 
 # Funcionalidades 
 
-Busca por qualquer cidade do mundo; 
-Exibição de dados climáticos em tempo real;
+Busca por qualquer cidade do mundo; <br>
+Exibição de dados climáticos em tempo real; <br>
 Alteração dinâmica do fundo do site com base na temperatura
 
 ## Pré-requisitos
