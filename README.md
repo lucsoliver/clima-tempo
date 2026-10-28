@@ -3,9 +3,13 @@
 <img src="src/images/video/site.gif" alt="Screenshot Site" style="width:auto; height:auto;" align="center">
 <br>
 
-# Sobre
+# Clima Tempo
 
-Um projeto web simples e interativo que exibe informações meteorológicas em tempo real de qualquer cidade, utilizei a API do [OpenWeatherMap](https://openweathermap.org/). <br>
+Projeto convertido para React + TypeScript, mantendo a mesma interface e a lógica de busca climática original.
+
+## Sobre
+
+Este app exibe informações meteorológicas em tempo real de qualquer cidade usando a API do [OpenWeatherMap](https://openweathermap.org/).
 
 Ele mostra:
 
@@ -14,61 +18,38 @@ Ele mostra:
 - Porcentagem de chuva estimada;
 - Velocidade do vento;
 - Condição do tempo;
-- Mudança de imagem do fundo de acordo com a temperatura local
-<br>
+- Mudança do fundo conforme o clima
 
-# Funcionalidades 
+## Pré-requisitos
 
-Busca por qualquer cidade do mundo; <br>
-Exibição de dados climáticos em tempo real;<br>
-Alteração dinâmica do fundo do site com base na temperatura
-<br>
-<br>
+- Node.js e npm instalados;
+- Chave da API do OpenWeatherMap;
+- Conexão com a internet
 
-# Pré-requisitos
+## Configuração local da API key
 
-Para executar o projeto localmente, você precisa de:
-
-- Um navegador web (Chrome, Edge, Firefox etc.);
-- Conexão com a internet (para acessar a API);
-- Uma chave gratuita da API do [OpenWeatherMap](https://openweathermap.org/api)
-<br>
-
-<!---
-> **Sobre a API** 
-> 
-> Este projeto usa a OpenWeather API com uma chave pública apenas para demonstração.
-> Os dados meteorológicos são fornecidos por [OpenWeather](https://openweathermap.org/), conforme os termos de uso disponíveis em https://openweather.co.uk/privacy-policy.  
-> Recomenda-se não reutilizar a mesma chave em ambientes de produção.
-<br>
---->
-
- # Tecnologias e conceitos
-
-HTML5 + CSS3 + JavaScript
-
-Fetch API
-
-Manipulação do DOM
-
-Uso de API externa (OpenWeatherMap)
-<br>
-<br>
-
-# Instalação
-
-Para instalar o projeto, siga estas etapas:
-
-### • Clone ou baixe este repositório.
+Crie um arquivo `.env` na raiz do projeto com a sua chave:
 
 ```bash
-git clone https://github.com/lucsoliver/clima-tempo.git
+VITE_OPENWEATHER_API_KEY=sua_chave_aqui
+```
+
+O arquivo `.env` fica local no seu computador e não deve ser enviado para o GitHub. Já incluímos `.env.example` como referência.
+
+## Instalação
+
+```bash
+npm install
+npm run dev
+```
+
+### Build de produção
+
+```bash
+npm run build
 ```
 
 ## Licença
 
 Este projeto está licenciado sob os termos da licença [MIT](https://github.com/lucsoliver/clima-tempo/blob/main/LICENSE).
-
-#
-Desenvolvido com carinho por [Lucas Oliveira](https://github.com/lucsoliver) :)
 
