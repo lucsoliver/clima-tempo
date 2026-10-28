@@ -3,13 +3,9 @@
 <img src="src/images/video/site.gif" alt="Screenshot Site" style="width:auto; height:auto;" align="center">
 <br>
 
-# Clima Tempo
-
-Projeto convertido para React + TypeScript, mantendo a mesma interface e a lógica de busca climática original.
-
 ## Sobre
 
-Este app exibe informações meteorológicas em tempo real de qualquer cidade usando a API do [OpenWeatherMap](https://openweathermap.org/).
+Um projeto web simples e interativo que exibe informações meteorológicas em tempo real de qualquer cidade, utilizei a API do [OpenWeatherMap](https://openweathermap.org/). <br>
 
 Ele mostra:
 
@@ -20,21 +16,26 @@ Ele mostra:
 - Condição do tempo;
 - Mudança do fundo conforme o clima
 
+# Funcionalidades 
+
+Busca por qualquer cidade do mundo; 
+Exibição de dados climáticos em tempo real;
+Alteração dinâmica do fundo do site com base na temperatura
+
 ## Pré-requisitos
 
 - Node.js e npm instalados;
 - Chave da API do OpenWeatherMap;
 - Conexão com a internet
 
-## Configuração local da API key
-
-Crie um arquivo `.env` na raiz do projeto com a sua chave:
-
-```bash
-VITE_OPENWEATHER_API_KEY=sua_chave_aqui
-```
-
-O arquivo `.env` fica local no seu computador e não deve ser enviado para o GitHub. Já incluímos `.env.example` como referência.
+<!---
+> **Sobre a API** 
+> 
+> Este projeto usa a OpenWeather API com uma chave pública apenas para demonstração.
+> Os dados meteorológicos são fornecidos por [OpenWeather](https://openweathermap.org/), conforme os termos de uso disponíveis em https://openweather.co.uk/privacy-policy.  
+> Recomenda-se não reutilizar a mesma chave em ambientes de produção.
+<br>
+--->
 
 ## Instalação
 
@@ -52,4 +53,7 @@ npm run build
 ## Licença
 
 Este projeto está licenciado sob os termos da licença [MIT](https://github.com/lucsoliver/clima-tempo/blob/main/LICENSE).
+
+#
+Desenvolvido com carinho por [Lucas Oliveira](https://github.com/lucsoliver) :)
 
