@@ -6,6 +6,7 @@ const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 function App() {
   const [city, setCity] = useState("");
+  const [searchedCity, setSearchedCity] = useState("");
   const [error, setError] = useState("");
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [isResultVisible, setIsResultVisible] = useState(false);
@@ -22,6 +23,7 @@ function App() {
     if (!cityName) {
       setError("Digite o nome da cidade.");
       setWeather(null);
+      setSearchedCity("");
       setIsResultVisible(false);
       setPageBackground(false);
       return;
@@ -32,6 +34,7 @@ function App() {
         "API key ausente. Defina VITE_OPENWEATHER_API_KEY no arquivo .env",
       );
       setWeather(null);
+      setSearchedCity("");
       setIsResultVisible(false);
       setPageBackground(false);
       return;
@@ -41,12 +44,14 @@ function App() {
       const data = await fetchWeatherByCity(cityName, apiKey);
       setWeather(data);
       setError("");
+      setSearchedCity(cityName);
       setIsResultVisible(true);
       setPageBackground(true);
     } catch (err) {
       console.error(err);
       setError("Cidade não encontrada. Tente novamente.");
       setWeather(null);
+      setSearchedCity("");
       setIsResultVisible(false);
       setPageBackground(false);
     }
@@ -77,7 +82,7 @@ function App() {
               id="search-title-second"
               className={isResultVisible ? "visible" : ""}
             >
-              Digite o nome da cidade
+              {isResultVisible ? searchedCity : "Digite o nome da cidade"}
             </h2>
           </header>
 
@@ -105,7 +110,11 @@ function App() {
             </button>
           </form>
 
-          <p className="search-paragraphy sp-bottom">
+          <p
+            className={`search-paragraphy sp-bottom ${
+              isResultVisible ? "hidden" : ""
+            }`}
+          >
             Dados meteorológicos atualizados para se manter informado sobre o
             clima.
           </p>
