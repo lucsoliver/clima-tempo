@@ -10,14 +10,20 @@ function App() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [isResultVisible, setIsResultVisible] = useState(false);
 
+  const setPageBackground = (isSuccess: boolean) => {
+    document.body.style.background = isSuccess ? "#87ceeb" : "#ebab87";
+  };
+
   const handleSearch = async (event?: FormEvent) => {
     event?.preventDefault();
 
-    if (!city.trim()) {
+    const cityName = city.trim();
+
+    if (!cityName) {
       setError("Digite o nome da cidade.");
       setWeather(null);
       setIsResultVisible(false);
-      document.body.style.background = "#ebab87";
+      setPageBackground(false);
       return;
     }
 
@@ -27,22 +33,22 @@ function App() {
       );
       setWeather(null);
       setIsResultVisible(false);
-      document.body.style.background = "#ebab87";
+      setPageBackground(false);
       return;
     }
 
     try {
-      const data = await fetchWeatherByCity(city, apiKey);
+      const data = await fetchWeatherByCity(cityName, apiKey);
       setWeather(data);
       setError("");
       setIsResultVisible(true);
-      document.body.style.background = "#87ceeb";
+      setPageBackground(true);
     } catch (err) {
       console.error(err);
       setError("Cidade não encontrada. Tente novamente.");
       setWeather(null);
       setIsResultVisible(false);
-      document.body.style.background = "#ebab87";
+      setPageBackground(false);
     }
   };
 
@@ -53,105 +59,109 @@ function App() {
   };
 
   return (
-    <div className="container">
+    <main className="page-shell">
       <img
         id="weather-bg-img"
-        className="weather-bg-img"
+        className={`weather-bg-img ${isResultVisible ? "visible" : ""}`}
         alt={weather?.description ?? ""}
         src={weather?.background ?? "/images/clear.jpg"}
-        style={{ display: isResultVisible ? "block" : "none" }}
       />
 
-      <div className="search-container weather-card" id="weather-card">
-        <h1
-          id="search-title"
-          style={{ display: isResultVisible ? "none" : "block" }}
-        >
-          Clima Tempo
-        </h1>
-        <h1
-          id="search-title-second"
-          style={{ display: isResultVisible ? "block" : "none" }}
-        >
-          Digite o nome da cidade
-        </h1>
+      <div className="app-frame">
+        <section className="search-container weather-card" id="weather-card">
+          <header className="search-header">
+            <h1 id="search-title" className={isResultVisible ? "hidden" : ""}>
+              Clima Tempo
+            </h1>
+            <h2
+              id="search-title-second"
+              className={isResultVisible ? "visible" : ""}
+            >
+              Digite o nome da cidade
+            </h2>
+          </header>
 
-        <p className="search-paragraphy sp-top">
-          Veja as condições atuais do tempo na <br />
-          cidade.
-        </p>
+          <p className="search-paragraphy sp-top">
+            Veja as condições atuais do tempo na cidade.
+          </p>
 
-        <form className="search-box" onSubmit={handleSearch}>
-          <input
-            type="text"
-            id="city"
-            value={city}
-            onChange={(event) => setCity(event.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Digite o nome da cidade"
-          />
-          <button type="submit" id="btn-pesquisar">
-            Pesquisar
-          </button>
-        </form>
+          <form className="search-box" onSubmit={handleSearch} noValidate>
+            <label htmlFor="city" className="sr-only">
+              Nome da cidade
+            </label>
+            <input
+              type="search"
+              id="city"
+              name="city"
+              value={city}
+              onChange={(event) => setCity(event.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Digite o nome da cidade"
+              aria-label="Digite o nome da cidade"
+              autoComplete="off"
+            />
+            <button type="submit" id="btn-pesquisar">
+              Pesquisar
+            </button>
+          </form>
 
-        <p className="search-paragraphy sp-bottom">
-          Dados meteorológicos atualizados para <br />
-          se manter informado sobre o clima.
-        </p>
+          <p className="search-paragraphy sp-bottom">
+            Dados meteorológicos atualizados para se manter informado sobre o
+            clima.
+          </p>
 
-        <div
-          className="container weather-container"
-          id="weather-container"
-          style={{ display: isResultVisible ? "flex" : "none" }}
-        >
-          <div className="box-results-temp">
-            <div className="clima-results-head">
-              <div className="temp-result-box">
-                <img
-                  id="icon-info"
-                  alt="Ícone do clima"
-                  src={weather?.icon ?? ""}
-                />
-                <p id="temp-info" className="status-info">
-                  {weather?.temp}
+          <div
+            className={`weather-container ${isResultVisible ? "visible" : ""}`}
+            id="weather-container"
+          >
+            <div className="box-results-temp">
+              <div className="clima-results-head">
+                <div className="temp-result-box">
+                  <img
+                    id="icon-info"
+                    alt="Ícone do clima"
+                    src={weather?.icon ?? ""}
+                  />
+                  <p id="temp-info" className="status-info">
+                    {weather?.temp}
+                  </p>
+                </div>
+                <p id="description-info" className="status-info">
+                  {weather?.description}
                 </p>
               </div>
-              <p id="description-info" className="status-info">
-                {weather?.description}
-              </p>
             </div>
-          </div>
 
-          <div className="results-bottom">
-            <div className="results-text-bottom r-border-text">
-              <p>Chuva</p>
-              <p id="rain-info" className="status-info">
-                {weather?.rain}
-              </p>
-            </div>
-            <div className="results-text-bottom r-border-text">
-              <p>Umidade</p>
-              <p id="humidity-info" className="status-info">
-                {weather?.humidity}
-              </p>
-            </div>
-            <div className="results-text-bottom ml-1">
-              <p>Vento</p>
-              <p id="wind-info" className="status-info">
-                {weather?.wind}
-              </p>
+            <div className="results-bottom">
+              <div className="results-text-bottom r-border-text">
+                <p>Chuva</p>
+                <p id="rain-info" className="status-info">
+                  {weather?.rain}
+                </p>
+              </div>
+              <div className="results-text-bottom r-border-text">
+                <p>Umidade</p>
+                <p id="humidity-info" className="status-info">
+                  {weather?.humidity}
+                </p>
+              </div>
+              <div className="results-text-bottom ml-1">
+                <p>Vento</p>
+                <p id="wind-info" className="status-info">
+                  {weather?.wind}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
+
+        {error && (
+          <p id="erro-info" role="alert">
+            {error}
+          </p>
+        )}
       </div>
-
-      {error && (
-        <p id="erro-info" style={{ display: "block" }}>
-          {error}
-        </p>
-      )}
-    </div>
+    </main>
   );
 }
 

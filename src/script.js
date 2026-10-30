@@ -13,6 +13,7 @@ async function getWeather() {
               const temp = data.main.temp;
               const rain = data.rain ? data.rain["1h"] : 0;
               const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
+              const formattedRain = Number(rainPercentage.toFixed(1));
               const humidity = data.main.humidity;
               const wind = data.wind.speed;
               const description = data.weather[0].description;
@@ -39,7 +40,7 @@ async function getWeather() {
                 temp
               )} °C`;
 
-              document.getElementById("rain-info").textContent = `${rain}%`;
+              document.getElementById("rain-info").textContent = `${formattedRain}%`;
 
               document.getElementById(
                 "humidity-info"

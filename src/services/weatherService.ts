@@ -18,10 +18,11 @@ export const fetchWeatherByCity = async (
   const weatherType = data.weather[0].main.toLowerCase();
   const rain = data.rain ? (data.rain["1h"] ?? 0) : 0;
   const rainPercentage = rain > 0 ? Math.min(rain * 10, 100) : 0;
+  const formattedRain = Number(rainPercentage.toFixed(1));
 
   return {
     temp: `${Math.round(data.main.temp)} °C`,
-    rain: `${rainPercentage}%`,
+    rain: `${formattedRain}%`,
     humidity: `${data.main.humidity}%`,
     wind: `${Math.round(data.wind.speed)} km/h`,
     description: data.weather[0].description,
