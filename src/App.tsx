@@ -12,7 +12,7 @@ function App() {
   const [isResultVisible, setIsResultVisible] = useState(false);
 
   const setPageBackground = (isSuccess: boolean) => {
-    document.body.style.background = isSuccess ? "#87ceeb" : "#ebab87";
+    document.body.classList.toggle("is-error", !isSuccess);
   };
 
   const handleSearch = async (event?: FormEvent) => {
@@ -65,6 +65,7 @@ function App() {
 
   return (
     <main className="page-shell">
+      <div className="sky" aria-hidden="true" />
       <img
         id="weather-bg-img"
         className={`weather-bg-img ${isResultVisible ? "visible" : ""}`}
@@ -87,7 +88,7 @@ function App() {
           </header>
 
           <p className="search-paragraphy sp-top">
-            Veja as condições atuais do tempo na cidade.
+            Consulte o clima da sua cidade.{" "}
           </p>
 
           <form className="search-box" onSubmit={handleSearch} noValidate>
