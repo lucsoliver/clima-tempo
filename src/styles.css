@@ -25,7 +25,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   padding: 1.5rem;
   background: linear-gradient(180deg, #3f87d6 0%, #87ceeb 55%, #d6eefa 100%)
     fixed;
@@ -369,7 +370,43 @@ button:hover {
 
 @media (max-width: 640px) {
   body {
-    padding: 1rem;
+    padding: 0.75rem;
+  }
+
+  .page-shell {
+    padding: 0;
+    min-height: auto;
+  }
+
+  .app-frame {
+    gap: 0.75rem;
+  }
+
+  .search-container {
+    min-width: 360px;
+    padding: 1.25rem 1rem;
+    border-radius: 20px;
+  }
+
+  #search-title {
+    font-size: 1.9rem;
+  }
+
+  .search-paragraphy {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .sp-top {
+    margin: 0.5rem 0 1.1rem;
+  }
+
+  .sp-bottom {
+    margin-top: 1.1rem;
+  }
+
+  .search-paragraphy br {
+    display: none;
   }
 
   .search-box {
@@ -377,20 +414,69 @@ button:hover {
   }
 
   input {
+    font-size: 1rem;
     border-radius: 14px;
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     margin-bottom: 0.75rem;
   }
 
   button {
+    width: 100%;
     border-radius: 14px;
+    padding: 0.85rem 1rem;
   }
 
+  .weather-container {
+    margin-top: 1.25rem;
+    padding: 1rem 0.75rem 0.75rem;
+    gap: 0.75rem;
+  }
+
+  #icon-info {
+    height: 2.5rem;
+  }
+
+  #temp-info {
+    font-size: 2.6rem;
+  }
+
+  #description-info {
+    font-size: 0.95rem;
+  }
+
+  .results-bottom {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .results-text-bottom {
+    min-height: 72px;
+    padding: 0.6rem 0.25rem;
+  }
+
+  .results-text-bottom p:first-child {
+    font-size: 0.68rem;
+  }
+
+  #rain-info,
+  #humidity-info,
+  #wind-info {
+    font-size: 0.9rem;
+  }
+
+  #erro-info {
+    width: 100%;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 360px) {
   .results-bottom {
     grid-template-columns: 1fr;
   }
 
-  .search-paragraphy br {
-    display: none;
+  .results-text-bottom {
+    min-height: 60px;
   }
 }
