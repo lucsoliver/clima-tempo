@@ -56,7 +56,7 @@ img {
   justify-content: center;
   align-items: flex-start;
   width: min(100%, 760px);
-  min-height: 60vh;
+  min-height: 50vh;
   padding: 1rem;
 }
 
